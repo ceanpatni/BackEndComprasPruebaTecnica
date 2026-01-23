@@ -26,4 +26,4 @@ security:
 
 microservices:
   productos:
-    url: http://localhost:8026
+    url: http://backend-productos:8026
