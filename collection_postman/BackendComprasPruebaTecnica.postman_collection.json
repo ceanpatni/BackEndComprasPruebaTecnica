@@ -1,0 +1,229 @@
+{
+  "info": {
+    "_postman_id": "e15cfeea-695d-42c2-a2a9-f4bb36435e5a",
+    "name": "BackendComprasPruebaTecnica",
+    "description": "Auth + Compras + Comunicación con BackendProductos + Inventario",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "34483753"
+  },
+  "item": [
+    {
+      "name": "Auth - Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let r = pm.response.json();",
+              "pm.environment.set(\"access_token\", r.access_token);",
+              "pm.environment.set(\"refresh_token\", r.refresh_token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"1234\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8025/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8025",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth - Refresh Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let r = pm.response.json();",
+              "pm.environment.set(\"access_token\", r.access_token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"refresh_token\": \"{{refresh_token}}\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8025/auth/refresh",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8025",
+          "path": [
+            "auth",
+            "refresh"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Compra - Realizar Compra",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"data\": {\n    \"type\": \"compra\",\n    \"attributes\": {\n      \"productoId\": 1,\n      \"cantidad\": 2\n    }\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8025/api/compras",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8025",
+          "path": [
+            "api",
+            "compras"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Inventario - Consultar Cantidad",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"productoId\": 1\n    }\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8025/api/inventario/consultar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8025",
+          "path": [
+            "api",
+            "inventario",
+            "consultar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Inventario - Actualizar Cantidad",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"productoId\": 1,\n      \"cantidad\": 3\n    }\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8025/api/inventario/actualizar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8025",
+          "path": [
+            "api",
+            "inventario",
+            "actualizar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Inventario - Crear Inventario",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"productoId\": 1,\n      \"cantidad\": 10\n    }\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8025/api/inventario/crear",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8025",
+          "path": [
+            "api",
+            "inventario",
+            "crear"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

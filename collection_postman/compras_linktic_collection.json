@@ -1,0 +1,31 @@
+{
+  "info": {
+    "name": "Linktic Compras API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Realizar Compra",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/compras",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "compras"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"data\": {\n    \"type\": \"compra\",\n    \"attributes\": {\n      \"productoId\": 1,\n      \"cantidad\": 2\n    }\n  }\n}"
+        }
+      }
+    }
+  ]
+}

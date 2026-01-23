@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:compras-test.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    database-platform: org.hibernate.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: create-drop  # crea las tablas al inicio y las borra al terminar
+    show-sql: true
+
