@@ -97,11 +97,67 @@ Se implementó la autenticación utilizando **JWT firmado con claves RSA**, con 
 - **Roles y autorizaciones:**  
   Dependiendo del `role` del usuario (`ROLE_ADMIN`, `ROLE_USER`, etc.), se permite o deniega el acceso a ciertos endpoints.
 
+### Pruebas Implementadas
+
+En este proyecto se realizaron pruebas unitarias y de integración para asegurar el correcto funcionamiento del microservicio BackEndCompras, enfocado en la validación de productos y gestión de inventario.
+
+#### Pruebas de Validación de Producto
+
+se verifico que el manejo de la existencia del producto solicitado en la compra.
+
+### Escenarios probados:
+
+Producto existente y con datos válidos.
+
+Producto inexistente (el microservicio de productos devuelve data=null o error).
+
+#### Resultado esperado:
+
+Si el producto existe, se procede con la compra.
+
+Si no existe, se lanza un BusinessException con el mensaje "El producto no existe".
+
+#### Pruebas de Inventario
+
+Se garantizo que la compra solo se ejecute si hay suficiente stock disponible.
+
+#### Escenarios probados:
+
+Cantidad solicitada menor o igual al stock disponible → la compra se realiza exitosamente.
+
+Cantidad solicitada mayor al stock disponible → se lanza un BusinessException con el mensaje "Stock insuficiente".
+
+#### Resultado esperado:
+
+El inventario se actualiza correctamente después de una compra exitosa.
+
+La compra es rechazada cuando no hay suficiente stock.
+
+### Pruebas de Producto No Encontrado en Inventario
+
+se valido que el sistema detecte si un producto existe en la base de datos de productos, pero no tiene registro en inventario.
+
+### Escenarios probados:
+
+Producto válido, pero no existe en la tabla de inventario.
+
+### Resultado esperado:
+
+Se lanza un BusinessException con el mensaje "El producto no existe en inventario".
+
 
 ## DOCKERIZACION
-## Dockerizacion backend Compras
+### 1. Build docker images
+docker build -t backend-compras ./BackEndComprasPruebaTecnica
+docker build -t backend-productos ./BackEndProductosPruebaTecnica
 
-## Dockerizacion backend productos
+### 2. Guardar imagen como tar (opcional)
+docker save backend-compras -o backend-compras.tar
+docker save backend-productos -o backend-productos.tar
+
+### 3. Ejecutar contenedores (con red y volumen)
+docker run -d --name backend-productos --network compras-network -v $(pwd)/productos.db:/app/productos.db -p 8026:8026 backend-productos
+docker run -d --name backend-compras --network compras-network -v $(pwd)/compras.db:/app/compras.db -p 8025:8025 backend-compras
 
 ### Versionamiento GIT
 #### Versionamiento Backend Compras
