@@ -1,0 +1,64 @@
+{
+  "info": {
+    "name": "Linktic Productos API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Crear Producto",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/productos",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "productos"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"resourceType\": \"producto\",\n  \"data\": {\n    \"attributes\": {\n      \"nombre\": \"Producto Ejemplo\",\n      \"precio\": 150.00,\n      \"descripcion\": \"Descripción del producto\"\n    }\n  }\n}"
+        }
+      }
+    },
+    {
+      "name": "Obtener Producto",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/productos/obtener",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "productos", "obtener"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"resourceType\": \"producto\",\n  \"data\": {\n    \"attributes\": {\n      \"id\": 1\n    }\n  }\n}"
+        }
+      }
+    },
+    {
+      "name": "Listar Todos los Productos",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/productos",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "productos"]
+        }
+      }
+    }
+  ]
+}

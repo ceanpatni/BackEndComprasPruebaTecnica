@@ -1,0 +1,29 @@
+server:
+  port: 8025
+
+spring:
+  datasource:
+    url: jdbc:sqlite:compras.db
+    driver-class-name: org.sqlite.JDBC
+
+  jpa:
+    database-platform: com.linktic.compras.config.SQLiteDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  sql:
+    init:
+      mode: always   # 👈 Esto obliga a ejecutar schema.sql
+
+security:
+  jwt:
+    issuer: linktic-auth
+    expiration-minutes: 30
+    refresh-expiration-minutes: 120
+    private-key-path: classpath:keys/privado.pem
+    public-key-path: classpath:keys/publico.pem
+
+microservices:
+  productos:
+    url: http://localhost:8026
